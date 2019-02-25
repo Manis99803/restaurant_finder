@@ -215,6 +215,7 @@ def add_review():
 		rating = request.form["rating"]
 		review_text = request.form["review_text"]
 		restaurant_id = request.form["restaurant_id_for_review"]
+		print(flask_login.current_user.id, flask_login.current_user.name, rating, review_text, restaurant_id)
 		db.add_review_to_db(flask_login.current_user.id, flask_login.current_user.name, rating, review_text, restaurant_id)
 	return redirect("get_restaurant_detail/" + restaurant_id)
 
