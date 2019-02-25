@@ -1,0 +1,2 @@
+6a1c0cb9f26d75392b6044bb48464af4 - Zomato API key
+curl -X GET --header "Accept: application/json" --header "user-key: 6a1c0cb9f26d75392b6044bb48464af4" "https://developers.zomato.com/api/v2.1/locations?query=Bengaluru&lat=12.9716&lon=77.5946&count=10"

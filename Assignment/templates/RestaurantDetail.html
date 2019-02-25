@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Foodkart</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/Common.css') }}">
+  <style>
+  
+  </style>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="{{ url_for('homepage') }}">Foodkart</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#about">About</a></li>
+            <li><a href="{{ url_for('Search') }}">Restaurant</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="{{ url_for('logout') }}">LOGOUT</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron text-center">
+      <h1 id = "RestaurantTitle">Foodkart</h1> 
+    </div>
+
+<!-- Container (About Section) -->
+    <div id="about" class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8">
+          {% for key, values in restaurant_details.items() %}
+          <p id = "RestaurantId" style="display: none"> {{ key }} </p>
+          <h1 style = "color: black" id = "restaurantname"> {{ values["name"] }}</h1>
+          <a href = "{{ values['url'] }}" class = "detail">Checkout on Zomato</a>
+          <p class = "detail">Location : {{ values["location"] }}</p>
+          <p class = "detail">Average Cost For Two : {{ values["average_cost_for_two"] }}</p>
+          <p class = "detail" id = "featured_image" style="display: none">{{ values["featured_image"] }}</p>
+          <a class = "detail" href = "{{ values['photos_url'] }}">For more photos click here</p>
+          <a href = "{{ values['menu_url'] }}" class = "detail" > Click to know the Menu </a><br>
+          <a class = "detail" href = "{{ values['event_url'] }}" > To know about event Click here </a>
+          <p class = "detail">Overall Rating : {{ values["user_rating"] }}</p>
+          <p class = "detail"> Online delivery : {{ values['has_online_delivery'] }}</p>
+          <p class = "detail">Is delivering now : {{ values['is_delivering_now'] }}</p>
+          <p class = "detail">Table booking : {{ values['has_table_booking'] }} </p>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+
+<!-- Container (Reviews Section) -->
+    <div id="reviews" class="container-fluid text-center">
+      <h2>Reviews</h2>
+      <h4>What our customer has to say</h4>
+      <div class="row slideanim">
+      <div class = "row">
+        <div class="col-sm-4 text-right">
+          <p class = "reivewItems" style="display: none" class = "detail">Rating: "1-5"</p><br>
+          <p class = "reivewItems" style="display: none" class = "detail">Review</p>
+        </div>
+        <div class = "col-sm-6 text-left">
+          <form action = "{{ url_for('add_review') }}" method = "POST">
+            <input type = "text" id = "RestaurantIdForReview" name = "restaurant_id_for_review" style="display: none">
+            <input type = "textbox" size = "80" placeholder="Add review" id = "ReviewBar" name = "rating"><br><br>
+            <div class="form-group" id = "ReviewBox" style="display: none">
+              <label for="comment" class = "detail">Review:</label>
+              <input type = "textarea" class="form-control" rows="5" id="review_text" name = "review_text" style="height: 100px;"> 
+            </div>
+            <span class = "align-left"><button id = "ReviewButton">Add review</button></span>
+          </div>
+          </form>
+        </div>
+        <div class="col-sm-2"></div>
+      </span>
+    </div>
+    </div>
+    <br>
+    <div class="row slideanim">
+      {% for key, value in restaurant_review.items() %}
+        {% for i in value %}
+                <div class="row">
+              <div class="col-sm-4 text-right" style="word-wrap: break-word;">
+                <p class = "detail">{{ i["user_name"] }}</p>
+              </div>
+              <div class="col-sm-6 text-left" style="word-wrap: break-word;">
+                  <p class = "detail">Rating {{ i["rating"]}}</p>
+                  <p class = "detail">Review {{ i["review_text"] }}</p>
+                  <button>Like</button>
+              </div>
+              <div class="col-sm-2">
+              </div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+
+
+    <footer class="container-fluid text-center">
+      <a href="#myPage" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </a>
+      <div id="contact" class="container-fluid bg-grey">
+      <h2 class="text-center">CONTACT</h2>
+      <div class="row">
+        <div class="col-sm-5">
+          <p>Manish Soni</p>
+          <p><span class="glyphicon glyphicon-map-marker"></span> PES University</p>
+          <p><span class="glyphicon glyphicon-phone"></span> 9980379709</p>
+          <p><span class="glyphicon glyphicon-envelope"></span> msoni6226@gmail.com</p>
+        </div>
+        <div class="col-sm-7 slideanim">
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+            </div>
+            <div class="col-sm-6 form-group">
+              <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+            </div>
+          </div>
+          <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+          <div class="row">
+            <div class="col-sm-12 form-group">
+              <button class="btn btn-default pull-right" type="submit">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </footer>
+
+
+  <script type="text/javascript" src = "{{ url_for('static', filename = 'js/Common.js') }}"></script>
+  <script>
+          $("#ReviewBar").on('click', function(e) {
+            $("#ReviewBox").css("display","")
+            $(".reivewItems").css("display","")
+            $("#ReviewBar").attr("placeholder","Rating")
+          })
+          $(".jumbotron").css("background-image","url("+$("#featured_image").html()+")")
+          $("#RestaurantTitle").html($("#restaurantname").html())
+          $("#RestaurantIdForReview").val(($("#RestaurantId").html()))
+  </script>
+
+</body>
+</html>

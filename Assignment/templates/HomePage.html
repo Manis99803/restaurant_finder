@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Foodkart</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/Common.css') }}">
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage">Foodkart</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">About</a></li>
+        <li><a href='Signup'>Signup</a></li>
+        <li><a href="login">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <h1 id = "RestaurantTitle">Foodkart</h1> 
+</div>
+  <br><br>
+  <div class = "row">
+    <div class = "col-md-4 text-center">
+      <img src = "{{ url_for('static', filename = 'images/Trending.jpeg') }}" style="width: 50%; height: 200px"/><br><br>
+      <a href = "https://www.zomato.com/bangalore/top-restaurants" class = "SubImage"> Trending this week</a>
+    </div>
+    <div class = "col-md-4 text-center">
+      <img src = "{{ url_for('static', filename = 'images/Newlyopened.jpeg') }}" style="width: 50%; height: 200px"/><br><br>
+      <a href = "https://www.zomato.com/bangalore/best-new-restaurants" class = "SubImage">Newly Opened</a>
+    </div>
+    <div class = "col-md-4 text-center">
+      <img src = "{{ url_for('static', filename = 'images/Bengaluru-finest.jpeg') }}" style="width: 50%; height: 200px"/><br><br>
+      <a href = "https://www.zomato.com/bangalore/great-food-no-bull" class = "SubImage">Bengaluru Finest</a>
+    </div>
+  </div>
+  <br><br>
+
+<!-- Container (Contact Section) -->
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <div id="contact" class="container-fluid bg-grey">
+  <h2 class="text-center">CONTACT</h2>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>Manish Soni</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> PES University</p>
+      <p><span class="glyphicon glyphicon-phone"></span> 9980379709</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> msoni6226@gmail.com</p>
+    </div>
+    <div class="col-sm-7 slideanim">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn btn-default pull-right" type="submit">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</footer>
+
+<script type="text/javascript" src ="{{ url_for('static', filename = 'js/Common.js') }}"></script>
+
+
+</body>
+</html>
