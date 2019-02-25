@@ -10,3 +10,5 @@ Library Required to run the Program:
 Run command:
   python3 Index.py 
   Go to browser : http://localhost:5000/homepage
+
+Reviews get added to the bottom of page
