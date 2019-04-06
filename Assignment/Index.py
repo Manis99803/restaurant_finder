@@ -111,11 +111,11 @@ def login():
 def Search():
 	if request.method == "GET":
 		cuisine_type = [{11:2},{22:2}]
-		cuisine_response = requests.get("https://developers.zomato.com/api/v2.1/cuisines?city_id=4&lat=12.9716&lon=77.5946", headers={"content-type":"application/json", "user-key": "6a1c0cb9f26d75392b6044bb48464af4"})
+		cuisine_response = requests.get("https://developers.zomato.com/api/v2.1/cuisines?city_id=4&lat=12.9716&lon=77.5946", headers={"content-type":"application/json", "user-key": "API-KEY"})
 		cuisine_response = cuisine_response.json()
-		restaurant_category = requests.get("https://developers.zomato.com/api/v2.1/categories", headers={"content-type":"application/json", "user-key": "6a1c0cb9f26d75392b6044bb48464af4"})
+		restaurant_category = requests.get("https://developers.zomato.com/api/v2.1/categories", headers={"content-type":"application/json", "user-key": "API-KEY"})
 		restaurant_category = restaurant_category.json()
-		restaurant_type = requests.get("https://developers.zomato.com/api/v2.1/establishments?city_id=4&lat=12.9716&lon=77.5946", headers={"content-type":"application/json", "user-key": "6a1c0cb9f26d75392b6044bb48464af4"})
+		restaurant_type = requests.get("https://developers.zomato.com/api/v2.1/establishments?city_id=4&lat=12.9716&lon=77.5946", headers={"content-type":"application/json", "user-key": "API-KEY"})
 		restaurant_type = restaurant_type.json()
 		print("Result obtained")
 		for key,value in cuisine_response.items():
@@ -141,7 +141,7 @@ def get_search_result():
 		restaurants_list = []
 		if request.args["type"] == 'Cuisine':
 			restaurant_response	=requests.get("https://developers.zomato.com/api/v2.1/search?entity_id=4&entity_type=city&start=1&count=10&cuisines="
-			 + request.args["id"], headers={"content-type":"application/json", "user-key": "6a1c0cb9f26d75392b6044bb48464af4"})
+			 + request.args["id"], headers={"content-type":"application/json", "user-key": "API-KEY"})
 			restaurant_response = restaurant_response.json()
 			restaurant_response = restaurant_response["restaurants"]
 			for i in restaurant_response:
@@ -150,11 +150,11 @@ def get_search_result():
 						value["average_cost_for_two"], value["featured_image"], value["location"]["address"]]})
 		elif request.args["type"] == 'Category':
 			restaurant_response	=requests.get("https://developers.zomato.com/api/v2.1/search?entity_id=4&entity_type=city&start=1&count=10&category="
-			 + request.args["id"], headers={"content-type":"application/json", "user-key": "6a1c0cb9f26d75392b6044bb48464af4"})
+			 + request.args["id"], headers={"content-type":"application/json", "user-key": "API-KEY"})
 			restaurant_response = restaurant_response.json()
 		elif request.args["type"] == 'Type':
 			restaurant_response	=requests.get("https://developers.zomato.com/api/v2.1/search?entity_id=4&entity_type=city&start=1&count=10&establishment_type="
-			 + request.args["id"], headers={"content-type":"application/json", "user-key": "6a1c0cb9f26d75392b6044bb48464af4"})
+			 + request.args["id"], headers={"content-type":"application/json", "user-key": "API-KEY"})
 			restaurant_response = restaurant_response.json()
 		else:
 			print("Invalid")
@@ -169,7 +169,7 @@ def get_restaurant_detail(restaurant_name):
 	if request.method == "GET":
 		print(restaurant_name)
 		restaurant_response	=requests.get("https://developers.zomato.com/api/v2.1/restaurant?res_id=" + restaurant_name, 
-			headers={"content-type":"application/json", "user-key": "6a1c0cb9f26d75392b6044bb48464af4"})
+			headers={"content-type":"application/json", "user-key": "API-KEY"})
 		restaurant_response = restaurant_response.json()
 		restaurant_detail = {}
 		restaurant_detail[restaurant_response["R"]["res_id"]] = {"name" : restaurant_response["name"], "url" : restaurant_response["url"], "location" : restaurant_response["location"]["address"] +" "
@@ -179,7 +179,7 @@ def get_restaurant_detail(restaurant_name):
 		"has_table_booking" : restaurant_response["has_table_booking"], "menu_url" : restaurant_response["menu_url"]}
 
 		restaurant_review	=requests.get("https://developers.zomato.com/api/v2.1/reviews?res_id=" + restaurant_name, 
-			headers={"content-type":"application/json", "user-key": "6a1c0cb9f26d75392b6044bb48464af4"})
+			headers={"content-type":"application/json", "user-key": "API-KEY"})
 		restaurant_review = restaurant_review.json()
 		restaurant_review = restaurant_review["user_reviews"]
 		restaurant_review_dictionary = {}
